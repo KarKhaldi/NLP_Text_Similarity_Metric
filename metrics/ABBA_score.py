@@ -57,6 +57,6 @@ def dist_between_ts(quantized_ts1, quantized_ts2):
             elif np.sign(quantized_ts1[element]) == - np.sign(quantized_ts2[element]):
                 distance += 0.5
                 # different sign, and different abs value
-                if quantized_ts1[element] != -quantized_ts2[element]
+                if quantized_ts1[element] != -quantized_ts2[element]:
                     distance += 0.25
     return distance
