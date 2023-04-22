@@ -2,7 +2,7 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
-def DEW_metric(references, candidates,model_input = 'bert-base-nli-mean-tokens'):
+def ABBA_Score(references, candidates,model_input = 'bert-base-nli-mean-tokens'):
     """
 
     Compute the ABBA_Score - Average Based BertEmbedding Approach - score of a list of candidate sentences with respect to one reference sentences.
@@ -30,10 +30,6 @@ def DEW_metric(references, candidates,model_input = 'bert-base-nli-mean-tokens')
     score = [1- (value/768) for value in score]
     return score
 
-
-
-
-
 # calculate our special distance between quantized time series
 def dist_between_ts(quantized_ts1, quantized_ts2):
     """
@@ -51,13 +47,16 @@ def dist_between_ts(quantized_ts1, quantized_ts2):
         # if element in ts1 equals element in ts2 then distance is 0
         if quantized_ts1[element] == quantized_ts2[element]:
             distance += 0
-        elif quantized_ts1[element] == 0:
+        elif (quantized_ts1[element] == 0) | (quantized_ts2[element] == 0):
             distance += 1
         else:
+            # same sign, different values
             if np.sign(quantized_ts1[element]) == np.sign(quantized_ts2[element]):
                 distance += 0.5
-            elif quantized_ts1[element] == - quantized_ts2[element]:
+            # different sign
+            elif np.sign(quantized_ts1[element]) == - np.sign(quantized_ts2[element]):
                 distance += 0.5
-            else:
-                distance += 0.75
+                # different sign, and different abs value
+                if quantized_ts1[element] != -quantized_ts2[element]
+                    distance += 0.25
     return distance
