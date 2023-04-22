@@ -1,7 +1,7 @@
 
 from sentence_transformers import SentenceTransformer
 from fastdtw import fastdtw
-
+import numpy as np
 def DEW_metric(references, candidates):
     """
 
@@ -22,4 +22,4 @@ def DEW_metric(references, candidates):
         embeddings2 = model.encode(candidates[i])
         distance, _ = fastdtw(embeddings1, embeddings2)
         score.append(distance)
-    return score
+    return -(np.array(score) - max(score))
