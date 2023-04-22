@@ -1,0 +1,16 @@
+rouge
+mauve-text
+bert-score
+pot
+sentence-transformers
+geomloss
+optimum 
+sentencepiece
+datasets
+astropy
+transformers
+torch
+nltk
+fastdtw
+torchmetrics
+pyemd
